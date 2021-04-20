@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Header from './components/Header';
 import Recipes from './components/Recipes';
 
-
 function App() {
   
   const url = 'http://127.0.0.1:8000/recipes';
@@ -35,7 +34,7 @@ function App() {
     
   return (
     <div className='container'>
-      <Header title = 'This is the title' />
+      <Header title='Change me in app.js'/>
       <Recipes recipes ={recipes} />
     </div>
   );

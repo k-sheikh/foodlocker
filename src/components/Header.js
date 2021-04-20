@@ -1,29 +1,43 @@
-import PropTypes from 'prop-types';
-import logo from '../logo.PNG'
-import Navbar from './Navbar';
+import React from 'react';
+import Button from './Button';
 
-const Header = ({ logo }) => {
 
-       
+const Header = ({ title }) => {
+    const onClick = () => {
+        console.log('click')
+    };
 
     return (
-        <header>
-            <Navbar /> 
-            <img src={logo} />
-        </header>
+        <div>
+            <h1>{ title }</h1>
+            <Button text='This is a button' onClick = {onClick} />
+        </div>
     )
 }
 
-Header.defaultProps = {
-    logo: logo,
-}
+export default Header;
 
-Header.propTypes = {
-    logo: PropTypes.string.isRequired,
-}
 
-export default Header
+// import PropTypes from 'prop-types';
+// import logo from '../logo.PNG'
+// import Navbar from './Navbar';
 
-//recipe?recipe?rating=5?limit=3
-// /recipe?recipe={insert recipe id here}
-// http://127.0.0.1:8000/recipe?recipe=5
+// const Header = ({ logo }) => {  
+
+//     return (
+//         <header>
+//             <Navbar /> 
+//             <img src={logo} />
+//         </header>
+//     )
+// }
+
+// Header.defaultProps = {
+//     logo: logo,
+// }
+
+// Header.propTypes = {
+//     logo: PropTypes.string.isRequired,
+// }
+
+// export default Header;
