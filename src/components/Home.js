@@ -32,14 +32,13 @@ const Home = () => {
     const ids = recipes.filter(recipe => recipe.rating === 5)
     console.log('IDs', ids)
     
-    const dataArray = []
+    const topRated = []
     for (let i=0; i<5; i++) {
-      const data = ids[Math.floor(Math.random() * ids.length)]
-      dataArray.push(data)
-      console.log('type of :', typeof(data))
-      console.log('data', data)
+      const randomRecipe = ids[Math.floor(Math.random() * ids.length)]
+      console.log(randomRecipe)
+      topRated.push(randomRecipe)
+      console.log('top-rated', topRated)  
     }
-    console.log(dataArray)
 
     const onClick = () => {
         window.location = '/search'
@@ -50,14 +49,8 @@ const Home = () => {
         <div>
             <Button text="search recipes" onClick={onClick}/>
             <RecipeCategory text='Top-rated'/>
-            <ul>
-                
-                <li key={dataArray[0].id}>{dataArray[0].name}</li>
-                  
-                
-            </ul>
+            <ul>{topRated.map(recipe => <li>{recipe.name}</li>)}</ul>
         </div>
-        
     )
 }
 
