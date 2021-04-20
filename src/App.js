@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from './components/Header';
 import Recipes from './components/Recipes';
+import Footer from './components/Footer';
 
 function App() {
   
@@ -36,6 +37,7 @@ function App() {
     <div className='container'>
       <Header title='Change me in app.js'/>
       <Recipes recipes ={recipes} />
+      <Footer />
     </div>
   );
 }
