@@ -1,24 +1,29 @@
 import PropTypes from 'prop-types';
+import logo from '../logo.PNG'
 import Navbar from './Navbar';
 
-const Header = ({ title }) => {
+const Header = ({ logo }) => {
 
        
 
     return (
         <header>
             <Navbar /> 
-            <h1>{title}</h1> 
+            <img src={logo} />
         </header>
     )
 }
 
 Header.defaultProps = {
-    title: 'Food Locker',
+    logo: logo,
 }
 
 Header.propTypes = {
-    title: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
 }
 
 export default Header
+
+//recipe?recipe?rating=5?limit=3
+// /recipe?recipe={insert recipe id here}
+// http://127.0.0.1:8000/recipe?recipe=5
