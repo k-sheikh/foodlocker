@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 const App = () => {
   const [search, setSearch] = useState(false)
 
-  const [error, setError] = useState(null)
+	const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [recipes, setRecipes] = useState([])
   
@@ -32,27 +32,55 @@ const App = () => {
   } else if (!isLoaded) {
     return <div>Loading...</div>
   } else {
-    return (
-      <ul>
-        {recipes.map((recipe) => (
-          <li key={recipe.id}>
-            {recipe.name}
-          </li>
-        ))}
-      </ul>
-    )
+      const ids = []
+      const getIds = async () => {
+        {recipes.filter(recipe => recipe.rating === 5).map((recipe) => (
+          ids.push(recipe.id)))}
+      return ids
+      }
+      getIds()
+      
+      const randomIds = []
+      const getRandomIds = async () => {
+        for (let i=0; i<5; i++) {
+          const data = await ids[Math.floor(Math.random() * ids.length)]
+          randomIds.push(data)
+        }
+        console.log(randomIds)
+        return randomIds
+      }
+      getRandomIds()
+      //const randomIds = ids[Math.floor(Math.random() * ids.length)]
+      //console.log(randomIds)   
+      //console.log(randomIds)
+      //return randomIds         
+      return randomIds
+                    
+      }
+    
+    // 
+    // return (
+    //   <ul>
+    //     {recipes.map((recipe) => (
+    //         <li>{recipe.rating}</li>
+          
+    //     ))}
+    //   </ul>
+    // )
   }
 
-  // return (
-  //   <Router>
-  //   <div className="App">
-  //     <Header />
-  //     {/*{search === false ? <Home /> : <Search />}*/}
-  //     <Route path='/' exact component={Home} />
-  //     <Route path='/search' exact component={Search} />
-  //   </div>
-  //   </Router>
-  // );
-}
+  //{{recipe.rating==5} && <li key={recipe.id}>{recipe.name}</li>}
+//   return (
+//     <Router>
+//     <div className="App">
+//       <Header />
+//       {/*{search === false ? <Home /> : <Search />}*/}
+//       <Route path='/' exact component={Home} />
+//       <Route path='/search' exact component={Search} />
+//     </div>
+//     </Router>
+//   );
+// }
 
-export default App;
+
+export default App
