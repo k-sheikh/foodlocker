@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Recipes from './components/Recipes';
 import Footer from './components/Footer';
+import Search from './components/Search';
 
 function App() {
   
@@ -34,11 +36,14 @@ function App() {
       };
     
   return (
-    <div className='container'>
-      <Header title='Change me in app.js'/>
-      <Recipes recipes ={recipes} />
-      <Footer />
-    </div>
+    <Router>
+      <div className='container'>
+        <Header />
+        <Recipes recipes ={recipes} />
+        <Route path='/search' exact component={Search} />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 export default App;
