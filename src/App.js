@@ -9,37 +9,63 @@ function App() {
   
   const url = 'http://127.0.0.1:8000/recipes';
   // we want our state in the top level so that we can use them in other components.
-  const [recipes, setRecipes] = useState([]);
+  const [fiveStarRecipes, setFiveStarRecipes] = useState([]);
+  const [quickRecipes, setQuickRecipes] = useState([]);
+
   useEffect(() => {
-    const getRecipes = async () => {    
-      const recipesFromServer = await fetchRecipes();
-      setRecipes(recipesFromServer);
+    const getFiveStarRecipes = async () => {    
+      const fiveStarRecipesFromServer = await fetchFiveStarRecipes();
+      setFiveStarRecipes(fiveStarRecipesFromServer);
     };
 
-    getRecipes()
+    getFiveStarRecipes()
   }, [])
 
-  const fetchRecipes = async () => {
+  const fetchFiveStarRecipes = async () => {
         const response = await fetch(url);
         const data = await response.json();
         const fiveStarData = data.filter((recipe) => (recipe.rating === 5));
         const topRated = [];
-        for (let i=0; i<5; i++) {
+        for (let i=0; i<3; i++) {
           const randomRecipe = fiveStarData[Math.floor(Math.random() * fiveStarData.length)];
           topRated.push(randomRecipe);
         }
 
         // delete this console.log(). Just there to show the data exists.
         console.log(topRated);
-
         return topRated;
+      };
+
+  useEffect(() => {
+    const getQuickRecipes = async () => {    
+      const quickRecipesFromServer = await fetchQuickRecipes();
+      setQuickRecipes(quickRecipesFromServer);
+    };
+
+    getQuickRecipes()
+  }, [])
+
+  const fetchQuickRecipes = async () => {
+        const response = await fetch(url);
+        const data = await response.json();
+        const quickData = data.filter((recipe) => (recipe.minutes <= 30));
+        const quick = [];
+        for (let i=0; i<3; i++) {
+          const randomQuickRecipe = quickData[Math.floor(Math.random() * quickData.length)];
+          quick.push(randomQuickRecipe);
+        }
+
+        // delete this console.log(). Just there to show the data exists.
+        console.log(quick);
+        return quick;
       };
     
   return (
     <Router>
       <div className='container'>
         <Header />
-        <Recipes recipes ={recipes} />
+        <Recipes recipes={fiveStarRecipes} title='Five Star Recipes' />
+        <Recipes recipes={quickRecipes} title='Recipes That Take Under 30 Minutes' />        
         <Route path='/search' exact component={Search} />
         <Footer />
       </div>
