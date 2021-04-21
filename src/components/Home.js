@@ -7,6 +7,7 @@ const Home = () => {
   // we want our state in the top level so that we can use them in other components.
   const [fiveStarRecipes, setFiveStarRecipes] = useState([]);
   const [quickRecipes, setQuickRecipes] = useState([]);
+  const [sandwiches, setSandwiches] = useState([])
 
   useEffect(() => {
     const getFiveStarRecipes = async () => {    
@@ -56,6 +57,30 @@ const Home = () => {
         return quick;
       };
 
+      useEffect(() => {
+        const getSandwiches = async () => {    
+          const sandwichRecipesFromServer = await fetchSandwiches();
+          setSandwiches(sandwichRecipesFromServer);
+        };
+    
+        getSandwiches()
+      }, [])
+    
+      const fetchSandwiches = async () => {
+            const response = await fetch(url);
+            const data = await response.json();
+            const sandwichData = data.filter((recipe) => ((recipe.name).includes('sandwich')));
+            const sandwich = [];
+            for (let i=0; i<3; i++) {
+              const randomSandwichRecipe = sandwichData[Math.floor(Math.random() * sandwichData.length)];
+              sandwich.push(randomSandwichRecipe);
+            }
+    
+            // delete this console.log(). Just there to show the data exists.
+            console.log(sandwich);
+            return sandwich;
+          };
+
     const onClick = () => {
         window.location = '/search'
         console.log('go to search');
@@ -63,9 +88,10 @@ const Home = () => {
 
     return (
         <div>
-            <Button text="search recipes" onClick={onClick}/>
-            <RecipeCategory recipes={fiveStarRecipes} title='Five Star Recipes' />
-            <RecipeCategory recipes={quickRecipes} title='Recipes That Take Under 30 Minutes' />
+            <Button text="Search Recipes" onClick={onClick}/>
+            <RecipeCategory recipes={fiveStarRecipes} title='Top-Rated Recipes' />
+            <RecipeCategory recipes={quickRecipes} title='Under 30 Minutes' />
+            <RecipeCategory recipes={sandwiches} title='Sandwiches' />
         </div>
         
     )
