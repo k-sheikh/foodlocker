@@ -3,8 +3,28 @@ import PropTypes from 'prop-types'
 import RecipeItem from './RecipeItem'
 
 const RecipeCategory = ({ text }) => {
-    // const [error, setError] = useState(null)
-    // const [isLoaded, setIsLoaded] = useState(false)
+    const [pics, setPics]  = useState([]);
+
+    useEffect(() => {
+        const getPics = async (query) => {
+            const response = await fetch(
+            `https://api.pexels.com/v1/search?query=${query}&per_page=1`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: '563492ad6f9170000100000112c00782d84d44bbafd7828b5154b405'
+                }
+            }
+            );
+        const result = await response.json();
+        setPics(result.photos ?? []);
+        }
+
+        getPics('fried chicken');
+
+    }, []);
+
     const [recipes, setRecipes] = useState([])
     
     useEffect(() => {
@@ -12,37 +32,29 @@ const RecipeCategory = ({ text }) => {
         .then(res => res.json())
         .then(
           (result) => {
-            // setIsLoaded(true)
             setRecipes(result)
           }
-        //   (error) => {
-        //     setIsLoaded(true)
-        //     setError(error)
-        //   }
         )
     }, [])
-    
-    // if (error) {
-    //   return <div>Error: {error.message}</div>
-    // } else if (!isLoaded) {
-    //   return <div>Loading...</div>
-    // } else {
-          
-    const ids = recipes.filter(recipe => recipe.rating === 5)
-    console.log('IDs', ids)
-    
-    const topRated = []
-    for (let i=0; i<5; i++) {
-      const randomRecipe = ids[Math.floor(Math.random() * ids.length)]
-      console.log(randomRecipe)
-      topRated.push(randomRecipe)
+
+    const topRated = () => {
+        const ids = recipes.filter(recipe => recipe.rating === 5)
+
+        const randomFiveStar = []
+        for (let i=0; i<5; i++) {
+            const randomRecipe = ids[Math.floor(Math.random() * ids.length)]
+            console.log(randomRecipe)
+            randomFiveStar.push(randomRecipe)
+        }
+        console.log('top-rated', randomFiveStar)
+        return randomFiveStar
     }
-    console.log('top-rated', topRated)
 
     return ( 
         <div>
             <h3>{text}</h3>
-            <p>{topRated.map(recipe => <RecipeItem name={recipe.name} rating={recipe.rating} />)}</p>
+            <p>{pics.map(pic => <img src={pic.src.small} alt='img' />)}</p>
+            <p>{topRated().map(recipe => <RecipeItem image='img' name={recipe.name} rating={recipe.rating} />)}</p>
         </div>
     )
 }
