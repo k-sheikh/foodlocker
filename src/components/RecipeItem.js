@@ -1,21 +1,17 @@
 import PropTypes from 'prop-types'
 
-const RecipeItem = ({ name, rating, image }) => {
-    return ( 
-        <div>
-            <ul>
-                <li>{image}</li>
-                <li>{name}</li>
-                <li>{rating}</li>
-            </ul>
+const RecipeItem = ( {recipe} ) => {
+    return (
+        <div className='recipe'>
+            <h3>{recipe.name}</h3>
+            <p>Desc: {recipe.description}</p>
+            <p>Star Rating: {recipe.rating}</p>           
         </div>
     )
 }
 
 RecipeItem.propTypes = {
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.string,
-    image: PropTypes.object
+    recipe: PropTypes.object
 }
 
-export default RecipeItem
+export default RecipeItem;
