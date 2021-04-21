@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 import { FaSearch } from "react-icons/fa"
 import Button from './Button'
 
-const Search = ({text}) => {
+const Search = () => {
+
+    
+    
     const onClick = () => {
         window.location = '/'
         console.log('go to home');
@@ -11,10 +14,11 @@ const Search = ({text}) => {
 
     return (
         <div>
-            <Button text="browse recipes" onClick={onClick} />
-            <h3>{text}</h3>
-            <input type="text" placeholder='Search by ingredient'/>
-            <button type="submit"><FaSearch/></button>
+            <Button text="Browse Recipes" onClick={onClick} />
+            <div className='SearchBar'>
+                <input type="text" placeholder='Search by ingredient'/>
+                <button type="submit" style={{backgroundColor: '#a0e4b0', padding: '0.2rem 0.3rem'}}><FaSearch/></button>
+            </div>
         </div>
     )
 }
