@@ -17,7 +17,7 @@ const RecipeCategory = ({ recipes, title }) => {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    Authorization: '563492ad6f917000010000018668d3f31cdb4ed28fb1450a0946d3e1'
+                    Authorization: '563492ad6f9170000100000112c00782d84d44bbafd7828b5154b405'
                 }
             }
             );
