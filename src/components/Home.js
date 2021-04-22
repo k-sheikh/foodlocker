@@ -26,7 +26,12 @@ const Home = () => {
         const topRated = [];
         for (let i=0; i<3; i++) {
           const randomRecipe = fiveStarData[Math.floor(Math.random() * fiveStarData.length)];
-          topRated.push(randomRecipe);
+          if (!topRated.includes(randomRecipe)) {
+            topRated.push(randomRecipe);
+          } else {
+            fetchFiveStarRecipes()
+          }
+                    
         }
 
         // delete this console.log(). Just there to show the data exists.
@@ -50,7 +55,12 @@ const Home = () => {
         const quick = [];
         for (let i=0; i<3; i++) {
           const randomQuickRecipe = quickData[Math.floor(Math.random() * quickData.length)];
-          quick.push(randomQuickRecipe);
+          if (!quick.includes(randomQuickRecipe)) {
+            quick.push(randomQuickRecipe);
+          } else {
+            fetchQuickRecipes()
+          }
+          
         }
 
         // delete this console.log(). Just there to show the data exists.
@@ -74,7 +84,12 @@ const Home = () => {
             const italian = [];
             for (let i=0; i<3; i++) {
               const randomItalianRecipe = italianData[Math.floor(Math.random() * italianData.length)];
-              italian.push(randomItalianRecipe);
+              if (!italian.includes(randomItalianRecipe)){
+                italian.push(randomItalianRecipe);
+              } else {
+                fetchItalian()
+              }
+              
             }
     
             // delete this console.log(). Just there to show the data exists.

@@ -97,15 +97,12 @@ body {
 }
 
 .Input {
-    font-size: 1.2rem;
     text-align: center;
     display: flex;
     width: 50px;
     margin: auto;
     background: #a0e4b0;
     border-color: black;
-    border-width: 0.2rem;
-    border-style: solid;
     border-radius: 1rem;
 }
 
