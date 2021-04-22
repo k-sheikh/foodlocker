@@ -112,7 +112,6 @@ const Home = () => {
             <RecipeCategory recipes={quickRecipes} title='Under 30 Minutes' />
             <RecipeCategory recipes={italian} title='Italian Recipes' />
         </div>
-        
     )
 }
 
