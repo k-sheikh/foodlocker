@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import RecipeCategory from './RecipeCategory'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import RecipeCategory from './RecipeCategory';
 import Button from './Button';
 
 const Home = () => {
@@ -81,14 +82,17 @@ const Home = () => {
             return sandwich;
           };
 
-    const onClick = () => {
-        window.location = '/search'
-        console.log('go to search');
-    }
-
+    // const onClick = () => {
+    //     window.location = '/search'
+    //     console.log('go to search');
+    // }
+    
+    // BELOW I HAVE DELETED onClick={onClick}
     return (
         <div>
-            <Button text="Search Recipes" onClick={onClick}/>
+            <Link to='/search'>
+              <Button text="Search Recipes" />
+            </Link>
             <RecipeCategory recipes={fiveStarRecipes} title='Top-Rated Recipes' />
             <RecipeCategory recipes={quickRecipes} title='Under 30 Minutes' />
             <RecipeCategory recipes={sandwiches} title='Sandwiches' />
