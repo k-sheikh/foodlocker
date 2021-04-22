@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import RecipeItem from './RecipeItem'
+import RecipeItem from './RecipeItem';
+import { useEffect, useState } from 'react'
 
-const RecipeCategory = ({ text }) => {
+// we dont want our recipes in the recipes component because we want to access these in other components.
+// we want to add it tou our app.js, (our global state), then we can pass them down as props.
+
+const RecipeCategory = ({ recipes, title }) => {
     const [pics, setPics]  = useState([]);
 
     useEffect(() => {
@@ -13,7 +17,7 @@ const RecipeCategory = ({ text }) => {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    Authorization: '563492ad6f9170000100000112c00782d84d44bbafd7828b5154b405'
+                    Authorization: '563492ad6f917000010000018668d3f31cdb4ed28fb1450a0946d3e1'
                 }
             }
             );
@@ -21,46 +25,28 @@ const RecipeCategory = ({ text }) => {
         setPics(result.photos ?? []);
         }
 
-        getPics('fried chicken');
+        const query = (recipes.map(recipe => recipe.name))
+        getPics(query)
+        
 
-    }, []);
-
-    const [recipes, setRecipes] = useState([])
+    }, [recipes]);
     
-    useEffect(() => {
-      fetch('/recipes')
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setRecipes(result)
-          }
-        )
-    }, [])
-
-    const topRated = () => {
-        const ids = recipes.filter(recipe => recipe.rating === 5)
-
-        const randomFiveStar = []
-        for (let i=0; i<5; i++) {
-            const randomRecipe = ids[Math.floor(Math.random() * ids.length)]
-            console.log(randomRecipe)
-            randomFiveStar.push(randomRecipe)
-        }
-        console.log('top-rated', randomFiveStar)
-        return randomFiveStar
-    }
-
-    return ( 
-        <div>
-            <h3>{text}</h3>
-            <p>{pics.map(pic => <img src={pic.src.small} alt='img' />)}</p>
-            <p>{topRated().map(recipe => <RecipeItem image='img' name={recipe.name} rating={recipe.rating} />)}</p>
+    return (
+        <div className='RecipeCategory'>
+            <h2>{title}</h2>
+            <div className='RecipeCategoryContent'>
+                {recipes.map((recipe) => (
+                    <RecipeItem key={ recipe.id } recipe={recipe} image={pics.map(pic => pic.src.small)} />
+                ))}
+            </div>
         </div>
+        
     )
 }
 
 RecipeCategory.propTypes = {
-    text: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    recipes: PropTypes.object.isRequired,
 }
 
-export default RecipeCategory
+export default RecipeCategory;

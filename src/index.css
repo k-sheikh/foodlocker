@@ -1,12 +1,14 @@
 body {
-    margin: 2rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+.Navbar {
+    display: flex-end;
+    background-color: #a0e4b0;
+    padding: 0.2rem;
 }
 
 .Navbar li {
@@ -17,5 +19,71 @@ code {
 }
 
 .Navbar li a {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1.2rem 5rem 1.2rem 5rem;
+    color: green;
+    transition: background 0.5s ease-out, color 0.5s ease-out;
+}
+
+.Navbar li :hover {
+    color: #a0e4b0;
+    background: #008000;
+}
+
+.Logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35rem;
+}
+
+.Navbar li a {
     text-decoration: none;
 }
+
+.Btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    background-color: #a0e4b0;
+}
+
+.Header {
+    text-align: center;
+}
+
+.RecipeCategoryContent {
+    display: flex;
+    justify-content: space-around;
+}
+
+.RecipeCategory h2 {
+    font-size: 2rem;
+    background-color: #a0e4b0;
+    padding: 0.5rem 1rem;
+}
+
+.RecipeItem {
+    width: 25%;
+    padding: 10px;
+    text-align: center;
+    border-color: #a0e4b0;
+    border-style: double;
+}
+
+.SearchBar {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.RecipeTitle {
+    cursor: pointer;
+}
+
+.RecipeTitle:hover {
+    color: #a0e4b0;
+}
+

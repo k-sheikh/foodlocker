@@ -7,9 +7,10 @@ const Header = ({ logo }) => {
        
 
     return (
-        <header>
+        <header className='Header'>
             <Navbar /> 
-            <img src={logo} />
+            <img src={logo} className='Logo'/>
+            
         </header>
     )
 }
