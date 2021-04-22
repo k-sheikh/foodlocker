@@ -1,6 +1,4 @@
-
 import { Link } from 'react-router-dom'
-import { FaSearch } from "react-icons/fa"
 import Button from './Button'
 import SearchRecipes from './SearchRecipes'
 
@@ -17,8 +15,8 @@ const Search = () => {
     // BELOW I HAVE DELETED onClick={onClick}
     return (
         <div>
-            <Link to='/' style={{textDecoration: 'none'}} >
-                <Button text="Browse Recipes" />
+            <Link to='/' style={{textDecoration: 'none'}} className="ButtonLink" >
+                <Button text="Browse Recipes" style={{cursor: 'pointer'}}/>
             </Link>
             
             <SearchRecipes />

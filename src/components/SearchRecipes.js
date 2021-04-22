@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SearchRecipesItem from './SearchRecipesItem';
 import { FaSearch } from "react-icons/fa"
 
@@ -34,6 +34,8 @@ const SearchRecipes = () => {
                             const randomRecipe = fiveStarSearch[Math.floor(Math.random() * fiveStarSearch.length)];
                             if (!topRatedSearch.includes(randomRecipe)) {
                                 topRatedSearch.push(randomRecipe);
+                            } else {
+                                i = i-1
                             }
                             
                         }
@@ -55,7 +57,7 @@ const SearchRecipes = () => {
                 <div>
                     <form onSubmit = { searchRecipes } >
                     <div className="SearchBar">
-                    <label htmlFor = "query" > Search for recipes by up to 5 ingredients: </label><br/><br/>
+                    <label className="SearchInstructions" htmlFor = "query" > Search for recipes by up to 5 ingredients: </label><br/><br/>
                     
                     <input className = "Input" name = "query" placeholder = "First ingredient" value = { query1 } onChange = { (e) => setQuery1(e.target.value) }/><br/> 
                     <input className = "Input" name = "query" placeholder = "Second ingredient (optional)" value = { query2 } onChange = { (e) => setQuery2(e.target.value) }/><br/> 
