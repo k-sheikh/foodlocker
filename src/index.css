@@ -70,6 +70,20 @@ body {
     justify-content: space-around;
 }
 
+@media only screen and (max-width: 900px) {
+    .RecipeCategoryContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .RecipeItem {
+        min-width: 70%;
+    }
+    .RecipeCategory h2 {
+        text-align: center;
+    }
+}
+
 .RecipeCategory h2 {
     font-size: 2rem;
     background-color: #a0e4b0;
@@ -78,13 +92,14 @@ body {
 
 .RecipeItem {
     width: 25%;
-    padding: 10px;
+    padding: 2rem;
     text-align: center;
     background-color: #a0e4b0;
     border-color: green;
     border-width: 0.2rem;
     border-style: solid;
     border-radius: 20px;
+    margin: 1rem;
 }
 
 .SearchBar {
@@ -97,13 +112,14 @@ body {
 }
 
 .Input {
+    font-size: 1.2rem;
     text-align: center;
     display: flex;
-    width: 50px;
     margin: auto;
     background: #a0e4b0;
     border-color: black;
     border-radius: 1rem;
+    width: 20rem;
 }
 
 .RecipeTitle {
@@ -115,11 +131,35 @@ body {
     transition: background 0.5s ease-out, color 0.5s ease-out;
 }
 
-.Input {
-    width: 30%;
-}
+
+/* .Input {
+    width: 20rem;
+} */
 
 .Footer {
     text-align: center;
     padding-top: 1.5rem;
+}
+
+.SearchResult {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #a0e4b0;
+    border-color: green;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-radius: 20px;
+    margin-top: 3rem;
+}
+
+.SearchResult h3 {
+    text-align: center;
+}
+
+.SearchResult small {
+    text-align: center;
 }

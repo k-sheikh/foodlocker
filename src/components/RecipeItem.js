@@ -10,10 +10,12 @@ const RecipeItem = ( {recipe, image} ) => {
         setShowRecipe(!showRecipe);
     }
 
+    const recipeName = (recipe.name).toUpperCase()
+
     return (
         <div className='RecipeItem'>
             <img src={image} alt='img'/>
-            <h3 onClick={onClick} className='RecipeTitle'>{recipe.name}</h3>
+            <h3 onClick={onClick} className='RecipeTitle'>{recipeName}</h3>
             <p>Rating: {recipe.rating} <FaStar style={{color: 'gold'}}/></p>
             <p>Rated by: {recipe.n_ratings} <FaChild style={{color: 'green'}}/></p>
             {showRecipe && <Recipe recipe={recipe} /> }           

@@ -30,9 +30,12 @@ const SearchRecipes = () => {
                         setIsLoaded(true)
                         const fiveStarSearch = result.filter((recipe) => (recipe.rating === 5));
                         const topRatedSearch = [];
-                        for (let i = 0; i < 2; i++) {
+                        for (let i = 0; i < 5; i++) {
                             const randomRecipe = fiveStarSearch[Math.floor(Math.random() * fiveStarSearch.length)];
-                            topRatedSearch.push(randomRecipe);
+                            if (!topRatedSearch.includes(randomRecipe)) {
+                                topRatedSearch.push(randomRecipe);
+                            }
+                            
                         }
                         setSearchedRecipes(topRatedSearch)
                     },
