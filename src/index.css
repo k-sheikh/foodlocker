@@ -73,12 +73,17 @@ body {
     border-style: double;
 }
 
-.RecipeItem h3 a :hover {
-    color: #a0e4b0;
-}
-
 .SearchBar {
     display: flex;
     justify-content: center;
     padding-top: 1rem;
 }
+
+.RecipeTitle {
+    cursor: pointer;
+}
+
+.RecipeTitle:hover {
+    color: #a0e4b0;
+}
+
