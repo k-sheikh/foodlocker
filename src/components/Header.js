@@ -9,7 +9,7 @@ const Header = ({ logo }) => {
     return (
         <header className='Header'>
             <Navbar /> 
-            <img src={logo} className='Logo'/>
+            <img src={logo} className='Logo' alt='logo'/>
             
         </header>
     )
