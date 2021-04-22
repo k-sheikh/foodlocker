@@ -13,18 +13,18 @@ const SearchRecipes = () => {
     const [error, setError] = useState(false)
     const [isLoaded, setIsLoaded] = useState(true)
 
-    // const url = `http://127.0.0.1:8000/search?ingredients=${query1.toLowerCase()}&ingredients=${query2.toLowerCase()}&ingredients=${query3.toLowerCase()}&ingredients=${query4.toLowerCase()}&ingredients=${query5.toLowerCase()}`
-
-
     const searchRecipes = (e) => {
         e.preventDefault();
-        // console.log("this works");
-
-        // const query = "pineapple";
 
         const url = `http://127.0.0.1:8000/search?ingredients=${query1.toLowerCase()}&ingredients=${query2.toLowerCase()}&ingredients=${query3.toLowerCase()}&ingredients=${query4.toLowerCase()}&ingredients=${query5.toLowerCase()}`;
         fetch(url)
-                .then(res => res.json())
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                    } else if (res.status === 404) {
+                        return Promise.reject('404 error')
+                    }
+                })
                 .then(
                     (result) => {
                         setIsLoaded(true)
@@ -40,7 +40,8 @@ const SearchRecipes = () => {
                             
                         }
                         setSearchedRecipes(topRatedSearch)
-                    },
+                    })
+                .catch(
                     (error) => {
                         setIsLoaded(true)
                         setError(error)
@@ -48,11 +49,10 @@ const SearchRecipes = () => {
 
         if (error) {
             console.log('error!!!')
-            return (<div>Error: {error.message}</div>)            
+            return (<div><p style={{color: 'aliceblue', textAlign: 'center'}}>No recipes found.</p></div>)            
         } else if (!isLoaded) {
-            return (<div><p>Loading..</p></div>)
+            return (<div><p style={{color: 'aliceblue', textAlign: 'center'}}>Loading..</p></div>)
         } else {
-            console.log('test')
             return ( 
                 <div>
                     <form onSubmit = { searchRecipes } >
@@ -75,32 +75,6 @@ const SearchRecipes = () => {
                     </div> 
                 </div>
             )}
-
-    // const searchRecipes = async(e) => {
-    //     e.preventDefault();
-    //     // console.log("this works");
-
-    //     // const query = "pineapple";
-
-    //     const url = `http://127.0.0.1:8000/search?ingredients=${query1.toLowerCase()}&ingredients=${query2.toLowerCase()}&ingredients=${query3.toLowerCase()}&ingredients=${query4.toLowerCase()}&ingredients=${query5.toLowerCase()}`;
-
-    //     try {
-    //         const response = await fetch(url);
-    //         const data = await response.json();
-
-    //         const fiveStarSearch = data.filter((recipe) => (recipe.rating === 5));
-    //         const topRatedSearch = [];
-    //         for (let i = 0; i < 2; i++) {
-    //             const randomRecipe = fiveStarSearch[Math.floor(Math.random() * fiveStarSearch.length)];
-    //             topRatedSearch.push(randomRecipe);
-    //         }
-    //         setSearchedRecipes(topRatedSearch);
-
-    //     } catch (err) {
-    //         console.error(err);
-        
-        // }
-
                 
     
 }

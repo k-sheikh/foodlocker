@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import logo from '../logo.PNG'
+import logo from '../logo.png'
 import Navbar from './Navbar';
 
 const Header = ({ logo }) => {

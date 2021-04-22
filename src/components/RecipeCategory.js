@@ -46,7 +46,7 @@ const RecipeCategory = ({ recipes, title }) => {
 
 RecipeCategory.propTypes = {
     title: PropTypes.string.isRequired,
-    recipes: PropTypes.object.isRequired,
+    recipes: PropTypes.array.isRequired,
 }
 
 export default RecipeCategory;
