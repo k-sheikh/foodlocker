@@ -11,6 +11,12 @@ body {
     justify-content: space-around;
     background-color: #a0e4b0;
     padding: 0.2rem;
+    border-bottom: 0.2rem;
+    border-color: aliceblue;
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
 
 .Navbar li {
@@ -24,13 +30,13 @@ body {
     font-weight: bold;
     font-size: 1.5rem;
     padding: 1.2rem 2.5rem 1.2rem 2.5rem;
-    color: green;
+    color: #54657d;
     transition: background 0.5s ease-out, color 0.5s ease-out;
 }
 
 .Navbar li :hover {
-    color: white;
-    background: #008000;
+    color: aliceblue;
+    background: #54657d;
 }
 
 .Logo {
@@ -45,10 +51,10 @@ body {
 }
 
 .Btn {
-    cursor: pointer;
     font-size: 1.3rem;
     display: block;
-    border-radius: 10px;
+    border-radius: 1rem;
+    border-color: aliceblue;
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
@@ -57,8 +63,8 @@ body {
 }
 
 .Btn:hover {
-    color: white;
-    background: green;
+    color: #54657d;
+    background: aliceblue;
     transition: background 0.5s ease-out, color 0.5s ease-out;
 }
 
@@ -87,12 +93,13 @@ body {
 
 .RecipeCategory h2 {
     font-size: 2rem;
+    color: #54657d;
     background-color: #a0e4b0;
     padding: 0.5rem 1rem 0.8rem 2rem;
-    border-top: 0.4rem;
+    border-top: 0.2rem;
+    border-bottom: 0.2rem;
     border-color: aliceblue;
     border-style: solid;
-    border-bottom: 0.4rem;
     border-left: none;
     border-right: none;
 }
@@ -102,7 +109,7 @@ body {
     padding: 2rem;
     text-align: center;
     background-color: #a0e4b0;
-    border-color: green;
+    border-color: aliceblue;
     border-width: 0.2rem;
     border-style: solid;
     border-radius: 20px;
@@ -118,13 +125,17 @@ body {
     padding: 1rem;
 }
 
+.SearchInstructions {
+    color: aliceblue;
+}
+
 .Input {
     font-size: 1.2rem;
     text-align: center;
     display: flex;
     margin: auto;
     background: #a0e4b0;
-    border-color: black;
+    border-color: aliceblue;
     border-radius: 1rem;
     width: 20rem;
 }
@@ -146,6 +157,20 @@ body {
 .Footer {
     text-align: center;
     padding-top: 1.5rem;
+    color: aliceblue;
+}
+
+.Footer h1 {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    font-size: 2.4rem;
+    transition: transform 0.3s ease-out;
+}
+
+.Footer h1:hover {
+    transform: translateY(1rem);
+    color: #a0e4b0;
 }
 
 .SearchResult {
@@ -156,7 +181,7 @@ body {
     padding: 1.5rem;
     text-align: center;
     background-color: #a0e4b0;
-    border-color: green;
+    border-color: aliceblue;
     border-width: 0.2rem;
     border-style: solid;
     border-radius: 20px;
@@ -169,4 +194,8 @@ body {
 
 .SearchResult small {
     text-align: center;
+}
+
+.ButtonLink {
+    cursor: default;
 }

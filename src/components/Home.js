@@ -29,9 +29,9 @@ const Home = () => {
           if (!topRated.includes(randomRecipe)) {
             topRated.push(randomRecipe);
           } else {
-            fetchFiveStarRecipes()
+            i = i-1
           }
-                    
+
         }
 
         // delete this console.log(). Just there to show the data exists.
@@ -58,7 +58,7 @@ const Home = () => {
           if (!quick.includes(randomQuickRecipe)) {
             quick.push(randomQuickRecipe);
           } else {
-            fetchQuickRecipes()
+            i = i-1
           }
           
         }
@@ -87,7 +87,7 @@ const Home = () => {
               if (!italian.includes(randomItalianRecipe)){
                 italian.push(randomItalianRecipe);
               } else {
-                fetchItalian()
+                i = i-1
               }
               
             }
@@ -105,8 +105,8 @@ const Home = () => {
     // BELOW I HAVE DELETED onClick={onClick}
     return (
         <div>
-            <Link to='/search' style={{textDecoration: 'none'}}>
-              <Button text="Search Recipes" />
+            <Link to='/search' style={{textDecoration: 'none'}} className="ButtonLink">
+              <Button text="Search Recipes"/>
             </Link>
             <RecipeCategory recipes={fiveStarRecipes} title='Top-Rated Recipes' />
             <RecipeCategory recipes={quickRecipes} title='Under 30 Minutes' />
