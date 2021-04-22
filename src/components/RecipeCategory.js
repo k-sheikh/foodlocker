@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import RecipeItem from './RecipeItem';
-import { useEffect, useState } from 'react'
+
 
 // we dont want our recipes in the recipes component because we want to access these in other components.
 // we want to add it tou our app.js, (our global state), then we can pass them down as props.
