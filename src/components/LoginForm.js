@@ -72,7 +72,7 @@ function LoginForm(props) {
                     onClick={handleSubmitClick}
                 >Login</button>
             </form>
-            <div>
+            <div className='SuccessMessage'>
                 {state.successMessage}
             </div>
 

@@ -9,7 +9,7 @@ const RegistrationForm = () => {
         password : "",
         confirmPassword: "",
         successMessage: null
-    })
+    });
 
     const handleChange = (e) => {
         const {id , value} = e.target   
@@ -80,7 +80,7 @@ const RegistrationForm = () => {
                     />
                 </label>
                 <label className="LoginLabel">
-                    <h3>Email address:</h3>
+                    <h3>Email Address:</h3>
                     <input
                         className="Input" 
                         type="email"
@@ -121,7 +121,7 @@ const RegistrationForm = () => {
                     Register
                 </button>
             </form>
-            <div>
+            <div className='SuccessMessage'>
                 {state.successMessage}
             </div>
             
