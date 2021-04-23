@@ -66,11 +66,12 @@ const RegistrationForm = () => {
         }
     }
     return (
-        <div>
+        <div className="Login">
             <form>
-                <label>
-                    Username
-                    <input 
+                <label className="LoginLabel">
+                    <h3>Username:</h3>
+                    <input
+                        className="Input" 
                         type="text"
                         id="username"
                         placeholder="enter username"   
@@ -78,9 +79,10 @@ const RegistrationForm = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <label>
-                    Email address
-                    <input 
+                <label className="LoginLabel">
+                    <h3>Email address:</h3>
+                    <input
+                        className="Input" 
                         type="email"
                         id="email"
                         placeholder="enter email" 
@@ -88,18 +90,20 @@ const RegistrationForm = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <label>
-                    Password
-                    <input type="password"  
+                <label className="LoginLabel">
+                    <h3>Password:</h3>
+                    <input className="Input"
+                        type="password"  
                         id="password"
                         placeholder="password"
                         value={state.password}
                         onChange={handleChange} 
                     />
                 </label>
-                <label>
-                    Confirm Password
-                    <input type="password"  
+                <label className="LoginLabel">
+                    <h3>Confirm Password:</h3>
+                    <input className="Input"
+                        type="password"  
                         id="confirmPassword" 
                         placeholder="confirm password"
                         value={state.confirmPassword}
@@ -107,9 +111,11 @@ const RegistrationForm = () => {
                     />
                 
                 </label>
+                <br/>
+                <br/>
                 <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="Btn"
                     onClick={handleSubmitClick}
                 >
                     Register

@@ -39,27 +39,35 @@ function LoginForm(props) {
             });
     }
     return(
-        <div>
+        <div className="Login">
             <form>
                 <div >
-                <label>Username</label>
-                <input type="text"  
+                <label className="LoginLabel"><h3>Username:</h3></label>
+              
+                <input className="Input" 
+                       type="text"  
                        id="username"  
                        placeholder="enter username" 
                        value={state.username}
                        onChange={handleChange}
                 />
                 </div>
+                <br/>
                 <div>
-                <label>Password</label>
-                <input type="password"  
+                <label className="LoginLabel"><h3>Password:</h3></label>
+                
+                <input className="Input" type="password"  
                        id="password" 
                        placeholder="enter password"
                        value={state.password}
                        onChange={handleChange} 
                 />
                 </div>
+                <br/>
+                <br/>
+                <br/>
                 <button 
+                    className="Btn"
                     type="submit" 
                     onClick={handleSubmitClick}
                 >Login</button>

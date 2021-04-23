@@ -129,6 +129,19 @@ body {
     color: aliceblue;
 }
 
+.LoginLabel {
+    color: aliceblue;
+    text-align: center;
+}
+
+.Login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
+
 .Input {
     font-size: 1.2rem;
     text-align: center;

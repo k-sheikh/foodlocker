@@ -8,18 +8,18 @@ import Footer from './components/Footer'
 
 const App = () => {
 
-  return (
-    <Router>
-      <div className="App">
-      <Header />
-        <Route path='/' exact component={Home} />
-        <Route path='/search' exact component={Search} />
-        <Route path='/login' exact component={Login} />
-        <Route path='/register' exact component={Register} />
-      </div>
-      <Footer/>
-    </Router>
-  );
+    return ( 
+        <Router>
+            <div className = "App">
+                <Header />
+                <Route path = '/'exact component = { Home }/> 
+                <Route path = '/search'exact component = { Search }/> 
+                <Route path = '/login' exact component = { Login }/> 
+                <Route path = '/register'exact component = { Register }/> 
+            </div>
+            <Footer />
+        </Router>
+    );
 }
 
 export default App
