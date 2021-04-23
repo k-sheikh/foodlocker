@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import logo from '../logo.png'
+import logo from '../logo.PNG';
 import Navbar from './Navbar';
 
 const Header = ({ logo }) => {
@@ -9,7 +9,7 @@ const Header = ({ logo }) => {
     return (
         <header className='Header'>
             <Navbar /> 
-            <img src={logo} className='Logo'/>
+            <img src={logo} alt='' className='Logo'/>
             
         </header>
     )
