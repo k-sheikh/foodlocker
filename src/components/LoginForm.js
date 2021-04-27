@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 
-function LoginForm() {
-    
+const LoginForm = () => {
     const [usernameLogin, setUsernameLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
     const [successMessageLogin, setSuccessMessageLogin] = useState(null);
