@@ -1,43 +1,67 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 
-function LoginForm(props) {
-    const [state , setState] = useState({
-        username : "",
-        password : "",
-        successMessage: null
-    })
-    const handleChange = (e) => {
-        const {id , value} = e.target   
-        setState(prevState => ({
-            ...prevState,
-            [id] : value
-        }))
+function LoginForm() {
+    
+    const [usernameLogin, setUsernameLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+    const [successMessageLogin, setSuccessMessageLogin] = useState(null);
+
+    const loginBody = {
+        "username": usernameLogin,
+        "password": passwordLogin
+    }
+
+    const handleUsernameChange = (e) => {
+        setUsernameLogin(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        setPasswordLogin(e.target.value);
     }
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
-        const payload={
-            "username":state.username,
-            "password":state.password,
-        }
-        axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', payload)
-            .then(function (response) {
-                if(response.data.key.length > 0){
-                    setState(prevState => ({
-                        ...prevState,
-                        'successMessage' : `Login successful. Hello ${state.username}!`
-                    }))
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                setState(prevState => ({
-                        ...prevState,
-                        'successMessage' : 'Login unsuccessful. Username and/or password incorrect'
-                }))
-            });
+        sendLoginDetailsToServer();
     }
+
+    const sendLoginDetailsToServer = () => {
+        if (!(usernameLogin.length && passwordLogin.length)) {
+            alert('Missing Values');
+            setSuccessMessageLogin('Please fill in the missing values.');
+            return;
+        }else if (passwordLogin.length < 8) {
+            alert('Password must be at least 8 characters long');
+            setSuccessMessageLogin('Password must be at least 8 characters long.');
+            setPasswordLogin('');
+            return;
+        }else {
+            const loginOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(loginBody)
+            };
+            fetch('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', loginOptions)
+            .then(
+                function (response) {
+                    if (response.status === 200) {
+                        alert(`Login successful. Hello ${usernameLogin}!`);
+                        setSuccessMessageLogin(`Login successful. Hello ${usernameLogin}!`);
+                        setUsernameLogin('');
+                        setPasswordLogin('');
+                    }else if (response.status === 400) {
+                        alert('Login unsuccessful. Username and/or Password incorrect');
+                        setSuccessMessageLogin('Login unsuccessful. Username and/or Password incorrect');
+                        setPasswordLogin('');
+                    }else {
+                        alert('Sorry, an error has occured.');
+                        setSuccessMessageLogin('Sorry, an error has occured');
+                        setPasswordLogin('');                        
+                    }
+                }
+            )
+        }
+    }
+    
     return(
         <div className="Login">
             <form>
@@ -46,10 +70,10 @@ function LoginForm(props) {
               
                 <input className="Input" 
                        type="text"  
-                       id="username"  
+                       id="usernameLogin"  
                        placeholder="enter username" 
-                       value={state.username}
-                       onChange={handleChange}
+                       value={usernameLogin}
+                       onChange={handleUsernameChange}
                 />
                 </div>
                 <br/>
@@ -57,10 +81,10 @@ function LoginForm(props) {
                 <label className="LoginLabel"><h3>Password:</h3></label>
                 
                 <input className="Input" type="password"  
-                       id="password" 
+                       id="passwordLogin" 
                        placeholder="enter password"
-                       value={state.password}
-                       onChange={handleChange} 
+                       value={passwordLogin}
+                       onChange={handlePasswordChange} 
                 />
                 </div>
                 <br/>
@@ -73,11 +97,12 @@ function LoginForm(props) {
                 >Login</button>
             </form>
             <div className='SuccessMessage'>
-                {state.successMessage}
+                {successMessageLogin}
             </div>
 
         </div>
     )
 }
+
 
 export default LoginForm;

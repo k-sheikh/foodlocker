@@ -1,82 +1,92 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 const RegistrationForm = () => {
+    const [usernameReg, setUsernameReg] = useState('');
+    const [emailReg, setEmailReg] = useState('');
+    const [passwordReg, setPasswordReg] = useState('');
+    const [confirmPasswordReg, setConfirmPasswordReg] = useState('');
+    const [successMessageReg, setSuccessMessageReg] = useState(null);
 
-    const [state , setState] = useState({
-        username: "",
-        email : "",
-        password : "",
-        confirmPassword: "",
-        successMessage: null
-    });
-
-    const handleChange = (e) => {
-        const {id , value} = e.target   
-        setState(prevState => ({
-            ...prevState,
-            [id] : value
-        }));
+    const body = {
+        'username': usernameReg,
+        'email': emailReg,
+        'password1': passwordReg,
+        'password2': confirmPasswordReg
     }
+
+    const handleUsernameChange = (e) => {
+        setUsernameReg(e.target.value);        
+    }
+
+    const handleEmailChange = (e) => {
+        setEmailReg(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        setPasswordReg(e.target.value);
+    }
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPasswordReg(e.target.value);
+    }
+    
     const sendDetailsToServer = () => {
-        if(state.username.length && state.email.length && (state.password.length >= 8) && state.confirmPassword.length) {
-            const payload={
-                "username":state.username,
-                "email":state.email,
-                "password1":state.password,
-                "password2":state.confirmPassword,
-            }
-            axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/', payload).then(
+        if (!(usernameReg.length && emailReg.length && passwordReg.length && confirmPasswordReg.length)) {
+            alert('Missing Values');
+            setSuccessMessageReg('Please fill in the missing values.');
+            return;
+        }else if (passwordReg.length < 8) {
+            alert('Password must be at least 8 characters long');
+            setSuccessMessageReg('Password must be at least 8 characters long.');
+            return;
+        }else if (passwordReg !== confirmPasswordReg) {
+            alert('Passwords don\'t match');
+            setSuccessMessageReg('Passwords don\'t match.');
+            return;
+        }else {
+            const Options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            };
+            fetch('http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/', Options)
+            .then(
                 function (response) {
-                    console.log(response.data.key.length)
-                    if(response.data.key.length > 0){
-                        setState(prevState => ({
-                            ...prevState,
-                            'successMessage' : `Registration successful. Hello ${state.username}`
-                        }));
-                        
-                    } else{
-                        setState(prevState => ({
-                        ...prevState,
-                        'successMessage' : 'Registration unsuccessful.'
-                        }));
+                    if (response.status === 201) {
+                        alert(`Registration successful. Hello ${usernameReg}!`);
+                        setSuccessMessageReg(`Registration successful. Hello ${usernameReg}!`);
+                        setUsernameReg('');
+                        setEmailReg('');
+                        setPasswordReg('');
+                        setConfirmPasswordReg('');
+                    } else if (response.status === 400) {
+                        alert('Username or Email already exists.');
+                        setSuccessMessageReg('Registration unsuccessful. Username or Email already exists');
                     }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });    
-        } else {
-            setState(prevState => ({
-                            ...prevState,
-                            'successMessage' : 'Registration unsuccessful. Please fill out all parts of the form & ensure passwords are at least 8 characters.'
-                        }))   
-        }
-        
-    }
+                }
+            
+            );
+        };
+    };
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
-        if(state.password === state.confirmPassword) {
-            sendDetailsToServer()    
-        } else {
-            setState(prevState => ({
-                            ...prevState,
-                            'successMessage' : 'Passwords do not match. Passwords must be at least 8 characters.'
-            }))
-        }
-    }
+        sendDetailsToServer();    
+    };
+
     return (
-        <div className="Login">
+        <div>
+            <div className="Login">
             <form>
                 <label className="LoginLabel">
                     <h3>Username:</h3>
                     <input
                         className="Input" 
                         type="text"
-                        id="username"
+                        id="usernameReg"
                         placeholder="enter username"   
-                        value={state.username}
-                        onChange={handleChange}
+                        value={usernameReg}
+                        onChange={handleUsernameChange}
                     />
                 </label>
                 <label className="LoginLabel">
@@ -84,30 +94,30 @@ const RegistrationForm = () => {
                     <input
                         className="Input" 
                         type="email"
-                        id="email"
+                        id="emailReg"
                         placeholder="enter email" 
-                        value={state.email}
-                        onChange={handleChange}
+                        value={emailReg}
+                        onChange={handleEmailChange}
                     />
                 </label>
                 <label className="LoginLabel">
                     <h3>Password:</h3>
                     <input className="Input"
                         type="password"  
-                        id="password"
+                        id="passwordReg"
                         placeholder="password"
-                        value={state.password}
-                        onChange={handleChange} 
+                        value={passwordReg}
+                        onChange={handlePasswordChange} 
                     />
                 </label>
                 <label className="LoginLabel">
                     <h3>Confirm Password:</h3>
                     <input className="Input"
                         type="password"  
-                        id="confirmPassword" 
+                        id="confirmPasswordReg" 
                         placeholder="confirm password"
-                        value={state.confirmPassword}
-                        onChange={handleChange} 
+                        value={confirmPasswordReg}
+                        onChange={handleConfirmPasswordChange} 
                     />
                 
                 </label>
@@ -122,11 +132,14 @@ const RegistrationForm = () => {
                 </button>
             </form>
             <div className='SuccessMessage'>
-                {state.successMessage}
-            </div>
+                {successMessageReg}
+            </div>    
+        </div>
+          
             
         </div>
     )
 }
 
 export default RegistrationForm;
+
