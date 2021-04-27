@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 const RegistrationForm = () => {
     const [usernameReg, setUsernameReg] = useState('');
@@ -13,6 +14,8 @@ const RegistrationForm = () => {
         'password1': passwordReg,
         'password2': confirmPasswordReg
     }
+
+    const history = useHistory();
 
     const handleUsernameChange = (e) => {
         setUsernameReg(e.target.value);        
@@ -59,6 +62,7 @@ const RegistrationForm = () => {
                         setEmailReg('');
                         setPasswordReg('');
                         setConfirmPasswordReg('');
+                        history.push('/');
                     } else if (response.status === 400) {
                         alert('Username or Email already exists.');
                         setSuccessMessageReg('Registration unsuccessful. Username or Email already exists');

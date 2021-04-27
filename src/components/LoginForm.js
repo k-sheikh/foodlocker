@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 
 function LoginForm() {
     
@@ -10,6 +11,8 @@ function LoginForm() {
         "username": usernameLogin,
         "password": passwordLogin
     }
+
+    const history = useHistory();
 
     const handleUsernameChange = (e) => {
         setUsernameLogin(e.target.value);
@@ -48,6 +51,7 @@ function LoginForm() {
                         setSuccessMessageLogin(`Login successful. Hello ${usernameLogin}!`);
                         setUsernameLogin('');
                         setPasswordLogin('');
+                        history.push('/');
                     }else if (response.status === 400) {
                         alert('Login unsuccessful. Username and/or Password incorrect');
                         setSuccessMessageLogin('Login unsuccessful. Username and/or Password incorrect');
